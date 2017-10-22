@@ -1,0 +1,25 @@
+{
+  "name": "hangman",
+  "version": "1.0.0",
+  "description": "homework week 11",
+  "main": "hangman.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acrosswhite/Constructor_hangman.git"
+  },
+  "keywords": [
+    "hangman"
+  ],
+  "author": "ashley crosswhite",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/acrosswhite/Constructor_hangman/issues"
+  },
+  "homepage": "https://github.com/acrosswhite/Constructor_hangman#readme",
+  "dependencies": {
+    "inquirer": "^3.3.0"
+  }
+}
