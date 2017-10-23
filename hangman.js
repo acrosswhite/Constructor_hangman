@@ -8,20 +8,21 @@ var wrongGuess = [];
 
 
 function CreateWord(gameWords){
-	console.log("Starting the Game!");
-	this.word = function(){
-		Math.floor(Math.random()*gameWords.length)};
+	//console.log("Starting the Game!");
+	this.word = gameWords[Math.floor(Math.random()*gameWords.length)];
 	this.guesses = numberOfGuesses;
+	//console.log(this.word)
 	//do some stuff to generate new word for guessing
 	//reset value of number of guesses
 }
 
-function ShowLetter(currentWord){
-	for (var i = 0; i < CreateWord.word.length; i++) {
+function ShowLetter(currentWord, letterGuessed){
+	for (var i = 0; i < currentWord.word.length; i++) {
 		currentWord[i] = "_"
 	}
 	wrongGuess = [];
 	remainingLetters = currentWord.length
+	guess = letterGuessed.userGuess
 	//change word to indexed letters
 	//replace letters with _
 
@@ -38,6 +39,9 @@ function ShowLetter(currentWord){
 				displayWord[j] = guess;
 				remainingLetters --;
 				foundMatch = true;
+				console.log()
+				}
+			}
 		}
 		wrongGuess.push(guess);
 		if (foundMatch === false) {
@@ -51,6 +55,7 @@ function ShowLetter(currentWord){
 	//add guessed letters to guesses array
 	//when all letters guessed, user wins
 	//when number of guesses empty, user loses
+	}
 }
 
 inquirer.prompt([
@@ -64,9 +69,21 @@ inquirer.prompt([
 		type: "confirm",
 	}
 	]).then(function(answers){
-		if(confirm){
+		//console.log(answers)
+		//console.log(JSON.stringify(answers, null, 2));
+		if(answers.game){
+			console.log("start")
 			currentWord = new CreateWord(gameWords);
-			ShowLetter(currentWord);
+			console.log(currentWord)
+			console.log("Starting the game")
+			inquirer.prompt([
+				{ name: "userGuess",
+				message: "Guess a letter"
+				}
+			]).then(function(letterGuessed){
+
+				ShowLetter(currentWord, letterGuessed);
+			})
 
 			//console.log()
 		}
@@ -74,3 +91,5 @@ inquirer.prompt([
 			console.log("ok, bye!")
 		}
 	})
+
+
