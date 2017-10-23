@@ -39,7 +39,8 @@ function ShowLetter(currentWord, letterGuessed){
 				displayWord[j] = guess;
 				remainingLetters --;
 				foundMatch = true;
-				console.log()
+				console.log("Your guess" + guess + "is correct!")
+				console.log(currentWord)
 				}
 			}
 		}
