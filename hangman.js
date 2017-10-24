@@ -1,7 +1,8 @@
 var inquirer = require("inquirer");
 var gameWords = ["Mickey", "Minnie", "Goofy", "Donald Duck", "Pluto", "Cinderella", "Snow White"];
+var alphabet = /^[A-Za-z]/
 var numberOfGuesses = 10;
-var currentWord = [];
+//var currentWord = [];
 var wrongGuess = [];
 
 //var numberOfSpaces = startingWord.length;
@@ -11,17 +12,26 @@ function CreateWord(gameWords){
 	//console.log("Starting the Game!");
 	this.word = gameWords[Math.floor(Math.random()*gameWords.length)];
 	this.guesses = numberOfGuesses;
+	this.displayWord = new Array(this.word.length);
+
+	for (var i = 0; i < this.word.length; i++) {
+		this.displayWord[i] = "_"
+		//console.log(this.displayWord)
+	}
+
+	this.display = function (){
+		return this.displayWord.join(' ')
+	}
 	//console.log(this.word)
 	//do some stuff to generate new word for guessing
 	//reset value of number of guesses
 }
 
 function ShowLetter(currentWord, letterGuessed){
-	for (var i = 0; i < currentWord.word.length; i++) {
-		currentWord[i] = "_"
-	}
+
+	var foundMatch = false;
 	wrongGuess = [];
-	remainingLetters = currentWord.length
+	remainingLetters = currentWord.word.length
 	guess = letterGuessed.userGuess
 	//change word to indexed letters
 	//replace letters with _
@@ -30,7 +40,7 @@ function ShowLetter(currentWord, letterGuessed){
 		if (guess.length !== 1){
 			console.log("please enter one letter");
 		}
-		else if (alphabet.indexOf(guess) <= -1) {
+		else if (!alphabet.test(guess)) {
 			console.log("select a valid letter");
 		}
 		else {
@@ -47,9 +57,9 @@ function ShowLetter(currentWord, letterGuessed){
 		wrongGuess.push(guess);
 		if (foundMatch === false) {
 				console.log("incorrect guess, please try again");
-				numberOfTurns --;
+				numberOfGuesses --;
 			}
-		if (numberOfTurns === 0){
+		if (numberOfGuesses === 0){
 			console.log("you ran out of turns! GAME OVER :(");
 	}
 	//prompt user for guess and change display of _ to letter guessed
@@ -57,6 +67,23 @@ function ShowLetter(currentWord, letterGuessed){
 	//when all letters guessed, user wins
 	//when number of guesses empty, user loses
 	}
+}
+
+
+
+function UserInput (currentWord){
+	if (numberOfGuesses >= 0){
+		inquirer.prompt([
+		{ name: "userGuess",
+		message: "Guess a letter"
+		}
+		]).then(function(letterGuessed){
+			console.log(letterGuessed)
+			ShowLetter(currentWord, letterGuessed);
+			UserInput(currentWord);
+			})	
+	}
+
 }
 
 inquirer.prompt([
@@ -75,16 +102,11 @@ inquirer.prompt([
 		if(answers.game){
 			console.log("start")
 			currentWord = new CreateWord(gameWords);
-			console.log(currentWord)
+			console.log("New word to guess" + "\nYou have 10 guesses")
+			console.log(currentWord.display());
+			//console.log(currentWord)
 			console.log("Starting the game")
-			inquirer.prompt([
-				{ name: "userGuess",
-				message: "Guess a letter"
-				}
-			]).then(function(letterGuessed){
-
-				ShowLetter(currentWord, letterGuessed);
-			})
+			UserInput(currentWord);
 
 			//console.log()
 		}
