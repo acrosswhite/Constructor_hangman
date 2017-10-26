@@ -1,35 +1,35 @@
-var alphabet = /^[A-Za-z]/
 var numberOfGuesses = 10;
 
 function ShowLetter(currentWord, letterGuessed){
+	var alphabet = /^[A-Za-z]+$/
 
-	var foundMatch = false;
-	wrongGuess = [];
-	remainingLetters = currentWord.word.length
-	guess = letterGuessed.userGuess
+	this.foundMatch = false;
+	this.wrongGuess = [];
+	this.remainingLetters = currentWord.word.length
+	this.guess = letterGuessed.userGuess
 	//change word to indexed letters
 	//replace letters with _
 
-	if (remainingLetters > 0) {
-		if (guess.length !== 1){
+	if (this.remainingLetters > 0) {
+		if (this.guess.length !== 1){
 			console.log("please enter one letter");
 		}
-		else if (!alphabet.test(guess)) {
+		else if (!alphabet.test(this.guess)) {
 			console.log("select a valid letter");
 		}
 		else {
 			for (var j = 0; j < currentWord.length; j++) {
 				if (guess === currentWord.charAt(j)){
 				displayWord[j] = guess;
-				remainingLetters --;
-				foundMatch = true;
-				console.log("Your guess" + guess + "is correct!")
+				this.numberOfGuesses --;
+				this.foundMatch = true;
+				console.log("Your guess" + this.guess + "is correct!")
 				console.log(currentWord)
 				}
 			}
 		}
-		wrongGuess.push(guess);
-		if (foundMatch === false) {
+		wrongGuess.push(this.guess);
+		if (this.foundMatch === false) {
 				console.log("incorrect guess, please try again");
 				numberOfGuesses --;
 			}
@@ -42,5 +42,6 @@ function ShowLetter(currentWord, letterGuessed){
 	//when number of guesses empty, user loses
 	}
 }
+
 
 module.exports = ShowLetter;

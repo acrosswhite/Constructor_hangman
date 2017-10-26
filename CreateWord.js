@@ -1,8 +1,12 @@
-var numberOfGuesses = 10;
+
+var gameWords = ["Mickey", "Minnie", "Goofy", "Donald Duck", "Pluto", "Cinderella", "Snow White"];
 
 function CreateWord(gameWords){
+	var numberOfGuesses = 10;
+
 	//console.log("Starting the Game!");
 	this.word = gameWords[Math.floor(Math.random()*gameWords.length)];
+	console.log(this.word)
 	this.guesses = numberOfGuesses;
 	this.displayWord = new Array(this.word.length);
 
@@ -11,12 +15,11 @@ function CreateWord(gameWords){
 		//console.log(this.displayWord)
 	}
 
-	this.display = function (){
+
+}
+
+CreateWord.prototype.display = function (){
 		return this.displayWord.join(' ')
-	}
-	//console.log(this.word)
-	//do some stuff to generate new word for guessing
-	//reset value of number of guesses
 }
 
 module.exports = CreateWord;
