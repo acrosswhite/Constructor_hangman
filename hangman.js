@@ -6,7 +6,7 @@ var numberOfGuesses = 10;
 var wrongGuess = [];
 
 function UserInput (currentWord){
-	if ((numberOfGuesses >= 0) && (currentWord.notWon())){
+	if ((numberOfGuesses > 0) && (currentWord.notWon())){
 		inquirer.prompt([
 		{ name: "userGuess",
 		message: "Guess a letter"
@@ -14,7 +14,7 @@ function UserInput (currentWord){
 		]).then(function(letterGuessed){
 			letterEntered = new ShowLetter(currentWord, letterGuessed)
 			console.log("\n")
-			console.log(letterGuessed)
+			//console.log(letterGuessed)
 			letterEntered.letters();
 			console.log(currentWord.display());
 			console.log("\n")
@@ -22,11 +22,11 @@ function UserInput (currentWord){
 			if (letterEntered.foundMatch===false){
 				numberOfGuesses--;
 				console.log("Wrong Guess, try again!")
-				console.log("\nNumber of Guesses left: " + numberOfGuesses)
+				console.log("\nNumber of Guesses left: " + numberOfGuesses + "\n")
 			}
 			})	
 	}
-	else if (numberOfGuesses <= 0){
+	else if (numberOfGuesses = 0){
 		console.log("Oh no! you lose! run node hangman.js to play again")
 	}
 	else if (currentWord.notWon() === false){
