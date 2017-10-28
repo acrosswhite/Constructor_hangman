@@ -1,26 +1,31 @@
 var inquirer = require("inquirer");
 var CreateWord = require("./CreateWord.js");
 var ShowLetter = require("./ShowLetter.js")
-var gameWords = ["Mickey", "Minnie", "Goofy", "Donald Duck", "Pluto", "Cinderella", "Snow White"];
-//var alphabet = /^[A-Za-z]/
+var gameWords = ["Mickey", "Minnie", "Goofy", "Pluto", "Cinderella", "Mulan", "Elsa", "Simba"];
 var numberOfGuesses = 10;
-//var currentWord = [];
 var wrongGuess = [];
 
 function UserInput (currentWord){
-	if (numberOfGuesses >= 0){
+	if ((numberOfGuesses >= 0) && (currentWord.notWon())){
 		console.log(numberOfGuesses)
 		inquirer.prompt([
 		{ name: "userGuess",
 		message: "Guess a letter"
 		}
 		]).then(function(letterGuessed){
+			letterEntered = new ShowLetter(currentWord, letterGuessed)
 			console.log(letterGuessed)
-			ShowLetter(currentWord, letterGuessed);
+			console.log(letterEntered.letters());
+			console.log(currentWord.display());
 			UserInput(currentWord);
 			})	
 	}
-
+	else if (numberOfGuesses <= 0){
+		console.log("Oh no! you lose! run node hangman.js to play again")
+	}
+	else if (currentWord.notWon() === false){
+		console.log("You win! Amazing! play again by typing node hangman.js")
+	}
 }
 
 inquirer.prompt([

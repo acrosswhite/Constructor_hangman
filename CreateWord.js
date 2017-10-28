@@ -22,4 +22,8 @@ CreateWord.prototype.display = function (){
 		return this.displayWord.join(' ')
 }
 
+CreateWord.prototype.notWon = function (){
+	return this.displayWord.includes("_")
+}
+
 module.exports = CreateWord;
