@@ -41,6 +41,4 @@ function ShowLetter(currentWord, letterGuessed){
 	}
 }
 
-
-
 module.exports = ShowLetter;
