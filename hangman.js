@@ -13,20 +13,19 @@ function UserInput (currentWord){
 		}
 		]).then(function(letterGuessed){
 			letterEntered = new ShowLetter(currentWord, letterGuessed)
+			console.log("\nNumber of Guesses left: " + numberOfGuesses + "\n")
 			console.log("\n")
-			//console.log(letterGuessed)
 			letterEntered.letters();
 			console.log(currentWord.display());
 			console.log("\n")
-			UserInput(currentWord);
 			if (letterEntered.foundMatch===false){
 				numberOfGuesses--;
-				console.log("Wrong Guess, try again!")
-				console.log("\nNumber of Guesses left: " + numberOfGuesses + "\n")
+				console.log("\nWrong Guess, try again!\n")
 			}
+			UserInput(currentWord);
 			})	
 	}
-	else if (numberOfGuesses = 0){
+	else if (numberOfGuesses === 0){
 		console.log("Oh no! you lose! run node hangman.js to play again")
 	}
 	else if (currentWord.notWon() === false){

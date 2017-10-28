@@ -2,10 +2,8 @@
 var gameWords = ["Mickey", "Minnie", "Goofy", "Donald Duck", "Pluto", "Cinderella", "Snow White"];
 
 function CreateWord(gameWords){
-	var numberOfGuesses = 10;
 	this.word = gameWords[Math.floor(Math.random()*gameWords.length)];
 
-	this.guesses = numberOfGuesses;
 	this.displayWord = new Array(this.word.length);
 
 	for (var i = 0; i < this.word.length; i++) {
