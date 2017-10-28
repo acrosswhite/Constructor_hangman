@@ -12,8 +12,7 @@ function ShowLetter(currentWord, letterGuessed){
 	//replace letters with _
 
 	this.letters = function(){
-
-			this.guess = letterGuessed.userGuess
+		this.guess = letterGuessed.userGuess
 		if (this.remainingLetters > 0) {
 			if (this.guess.length !== 1){
 				console.log("\n")
@@ -37,13 +36,7 @@ function ShowLetter(currentWord, letterGuessed){
 			this.wrongGuess.push(this.guess);
 			if (this.foundMatch === false) {
 					console.log("\n")
-					//console.log("incorrect guess, please try again");
 				}
-
-	//prompt user for guess and change display of _ to letter guessed
-	//add guessed letters to guesses array
-	//when all letters guessed, user wins
-	//when number of guesses empty, user loses
 		}
 	}
 }

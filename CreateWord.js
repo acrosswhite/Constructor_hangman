@@ -11,8 +11,6 @@ function CreateWord(gameWords){
 	for (var i = 0; i < this.word.length; i++) {
 		this.displayWord[i] = "_"
 	}
-
-
 }
 
 CreateWord.prototype.display = function (){
