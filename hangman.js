@@ -1,23 +1,29 @@
 var inquirer = require("inquirer");
 var CreateWord = require("./CreateWord.js");
 var ShowLetter = require("./ShowLetter.js")
-var gameWords = ["Mickey", "Minnie", "Goofy", "Pluto", "Cinderella", "Mulan", "Elsa", "Simba"];
+var gameWords = ["mickey", "minnie", "goofy", "pluto", "cinderella", "mulan", "elsa", "simba"];
 var numberOfGuesses = 10;
 var wrongGuess = [];
 
 function UserInput (currentWord){
 	if ((numberOfGuesses >= 0) && (currentWord.notWon())){
-		console.log(numberOfGuesses)
 		inquirer.prompt([
 		{ name: "userGuess",
 		message: "Guess a letter"
 		}
 		]).then(function(letterGuessed){
 			letterEntered = new ShowLetter(currentWord, letterGuessed)
+			console.log("\n")
 			console.log(letterGuessed)
-			console.log(letterEntered.letters());
+			letterEntered.letters();
 			console.log(currentWord.display());
+			console.log("\n")
 			UserInput(currentWord);
+			if (letterEntered.foundMatch===false){
+				numberOfGuesses--;
+				console.log("Wrong Guess, try again!")
+				console.log("\nNumber of Guesses left: " + numberOfGuesses)
+			}
 			})	
 	}
 	else if (numberOfGuesses <= 0){
@@ -39,18 +45,15 @@ inquirer.prompt([
 		type: "confirm",
 	}
 	]).then(function(answers){
-		//console.log(answers)
-		//console.log(JSON.stringify(answers, null, 2));
 		if(answers.game){
-			console.log("start")
-			currentWord = new CreateWord(gameWords);
-			console.log("New word to guess" + "\nYou have 10 guesses")
-			console.log(currentWord.display());
-			//console.log(currentWord)
+			console.log("\n")
 			console.log("Starting the game")
+			console.log("--------------------------------")
+			currentWord = new CreateWord(gameWords);
+			console.log("You have a new word to guess" + "\nYou have " + numberOfGuesses + " guesses\n")
+			console.log(currentWord.display());
+			console.log("\n")
 			UserInput(currentWord);
-
-			//console.log()
 		}
 		else {
 			console.log("ok, bye!")
